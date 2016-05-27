@@ -8,7 +8,7 @@
   /** @ngInject */
   function MyDeckPreviewController($stateParams, $state, BackendService, $log,
                                     DeckService, $mdDialog, $translate, $document,
-                                    $mdMedia, $scope, TipsService, $mdToast) {
+                                    $mdMedia, $scope, TipsService, $mdToast, Upload) {
 
     var vm = this;
     vm.deckId = $stateParams.deckId;
@@ -178,12 +178,16 @@
         }
       }
 
+
+
       cancelDialog();
       cardSaveToast();
 
       if(vm.hints.length === 0)
         vm.addHintTranslate = $translate.instant("preview-HINT");
     }
+
+
 
 
 

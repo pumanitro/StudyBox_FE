@@ -29,14 +29,14 @@
     .service('BackendService', BackendService);
 
   /** @ngInject */
-  function BackendService($http, $q) {
+  function BackendService($http, $q, Upload) {
 
     this.getDeckById = getDeckById;
     this.getDecksByName = getDecksByName;
     this.getDecks = getDecks;
     this.createNewDeck = createNewDeck;
     this.drawRandomDeck = drawRandomDeck;
-
+    this.uploadPic = uploadPic;
     this.Deck = Deck;  // class
 
     /* *** */
@@ -292,6 +292,26 @@
           return $q.reject(response.data);
         }
       );
+    }
+
+    function uploadPic(file,deckId,flashcardId) {
+      file.upload = Upload.upload(
+        {
+          url: '/api/decks/'+deckId+'/flashcards/'+flashcardId+'/questionImage',
+          data: {file: file}
+        });
+
+      file.upload.then(function (response) {
+        $timeout(function () {
+          file.result = response.data;
+        });
+      }, function (response) {
+        if (response.status > 0)
+          file.errorMsg = response.status + ': ' + response.data;
+      }, function (evt) {
+        // Math.min is to fix IE which reports 200% sometimes
+        file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+      });
     }
   }
 
