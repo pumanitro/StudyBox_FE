@@ -18,6 +18,7 @@
       'toastr',
       'pascalprecht.translate',
       'orderByLocaleAware',
+      'ngFileUpload',
 
       /*team modules*/
       'translator',

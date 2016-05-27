@@ -170,6 +170,9 @@
               </md-input-container>
 
               <div layout="row">
+                <md-progress-linear ng-show="questionFile.progress >= 0" md-mode="determinate" value="{{questionFile.progress}}"></md-progress-linear>
+                <md-progress-linear ng-show="answerFile.progress >= 0" md-mode="determinate" value="{{answerFile.progress}}"></md-progress-linear>
+
                 <md-button type="submit" class="md-raised addCardButtons addCardButton"
                            ng-if="!myDeckPreview.editMode"  flex="50">{{"addCard-ADD_TO_DECK" | translate}}</md-button>
                 <md-button type="submit" class="md-raised addCardButtons addCardButton"
