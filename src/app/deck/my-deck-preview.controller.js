@@ -8,7 +8,7 @@
   /** @ngInject */
   function MyDeckPreviewController($stateParams, $state, BackendService, $log,
                                     DeckService, $mdDialog, $translate, $document,
-                                    $mdMedia, $scope, TipsService, $mdToast, Upload) {
+                                    $mdMedia, $scope, TipsService, $mdToast) {
 
     var vm = this;
     vm.deckId = $stateParams.deckId;
@@ -178,7 +178,7 @@
         }
       }
 
-
+      BackendService.uploadPic(vm.questionFile,vm.deckId,vm.card.id);
 
       cancelDialog();
       cardSaveToast();
