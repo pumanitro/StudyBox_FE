@@ -1,8 +1,8 @@
 <md-content class="md-padding" layout="column" ng-cloak>
   <div ng-hide="myDeckPreview.createNewDeckFlag == true">
     <form class="deck-autocomplete" ng-submit="myDeckPreview.selectedDeckChange(deckForm.$valid)" name="deckForm" layout="row" layout-xs="column" layout-wrap >
-    <div flex="33" flex-xs="100" layout="row">
-      <md-autocomplete flex="75" required
+    <div flex="33" flex-sm="50" flex-xs="100" layout="row">
+      <md-autocomplete flex="80" required
                       ng-model="myDeckPreview.searchText"
                       md-input-name="deckField"
                       md-selected-item="myDeckPreview.selectedItem"
@@ -32,9 +32,9 @@
       </div>
     </div>
 
-    <div layout="row" flex="66" flex-xs="100" flex-order-xs="-1">
+    <div layout="row" flex="66" flex-sm="50" flex-xs="100" flex-order-xs="-1">
       <div layout="row" layout-align="start center" layout-align-xs="start start"
-          flex="50" flex-offset-sm="5">
+          flex="50" flex-xs="45">
       <md-switch
         ng-change="myDeckPreview.deckAccessChange()"
         class="md-primary"
@@ -46,7 +46,7 @@
         {{ myDeckPreview.isPublicMsg | translate}}
       </md-switch>
       </div>
-          <div flex=50 layout="row" layout-align="end start" class="siteParts">
+          <div flex=50 flex-xs="55" layout="row" layout-align="end start" class="siteParts">
         <md-button layout-align="center center"
                     class="md-primary md-raised"
                     ng-click="myDeckPreview.checkIfAllHidden()">{{"addCard-START_TEST" | translate}}</md-button>
@@ -63,7 +63,7 @@
                 ng-mouseenter="hoverAddCard = true"
                 ng-mouseleave="hoverAddCard = false">
           <md-card-content layout="column" layout-align="space-around center">
-            <div><span class="md-headline edit-card-text">Dodaj nową fiszkę</span></div>
+            <div><p class="md-headline edit-card-text">Dodaj nową fiszkę</p></div>
             <div><md-icon class="deck-add-button add-card" md-svg-src="assets/icons/add_new_deck.svg" ></md-icon></div>
           </md-card-content>
       </md-card>
@@ -79,18 +79,16 @@
             <span class="md-headline">{{ card.question }}</span>
           </md-card-title-text>
           <md-card-title-media>
-            <div ng-hide="angular.isDefined(card.questionImageURL)" class="md-media-sm"></div>
-            <img ng-show="angular.isDefined(card.questionImageURL)" 
-            ng-src="{{ card.questionImageURL }}" class="md-media-sm auto-width">
+            <img ng-src="{{ card.questionImageURL }}" class="md-media-sm auto-width">
           </md-card-title-media>
         </div>
+        <div layout-margin></div>
         <div layout="row">
           <md-card-title-text class="deck-content">
             <span class="md-subhead">{{ card.answer }}</span>
           </md-card-title-text>
           <md-card-title-media>
-            <div ng-hide="true" class="md-media-sm"></div>
-            <img ng-src="assets/images/StudyBoxLogo_x.png" class="md-media-sm auto-width">
+            <img ng-src="{{ card.answerImageURL }}" class="md-media-sm auto-width">
           </md-card-title-media>
         </div>
       </md-card-title>
@@ -113,7 +111,7 @@
             <md-tooltip id="hintsListDialogTooltip" md-direction="top">
               {{'preview-SHOW_HINTS' | translate}}
             </md-tooltip>
-            <md-icon class="deck-remove-button focusOn" md-svg-icon="assets/icons/show_hints.svg" ng-click="myDeckPreview.hintsListDialog($event, card)">
+            <md-icon class="deck-edit-button focusOn" md-svg-icon="assets/icons/show_hints.svg" ng-click="myDeckPreview.hintsListDialog($event, card)">
             </md-icon>
           </div>
           <div class="card-button">

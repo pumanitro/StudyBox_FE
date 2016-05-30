@@ -12,11 +12,20 @@ md-content {
 
 #searchInput {
   min-height: 30px;
+  padding: 5px;
+  border-radius: 2px;
+  border-style: none;
+}
+
+@media only screen and (max-width: 1079px) {
+  #deckSearch {
+    font-size: 90%;
+  }
 }
 
 @media only screen and (max-width: 459px) {
   #deckSearch {
-    font-size: 90%;
+    font-size: 80%;
   }
 }
 
