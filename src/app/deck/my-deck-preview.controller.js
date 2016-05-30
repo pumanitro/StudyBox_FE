@@ -8,7 +8,7 @@
   /** @ngInject */
   function MyDeckPreviewController($stateParams, $state, BackendService, $log,
                                     DeckService, $mdDialog, $translate, $document,
-                                    $mdMedia, $scope, TipsService, $mdToast) {
+                                    $mdMedia, $scope, TipsService, $mdToast, Upload, $timeout) {
 
     var vm = this;
     vm.deckId = $stateParams.deckId;
@@ -178,18 +178,51 @@
         }
       }
 
-      BackendService.uploadPic(vm.questionFile,vm.deckId,vm.card.id);
 
-      cancelDialog();
-      cardSaveToast();
+      uploadPic(vm.questionFile,vm.deckId,vm.card.id)
+        .then(function () {
+          $timeout(function () {
+            //alert("poszło\n"+ angular.toJson(vm.questionFile.result)); -- response do parametru funkcji
+            uploadPic(vm.answerFile,vm.deckId,vm.card.id)
+              .then(function () {
+                $timeout(function () {
+                  cancelDialog();
+                  cardSaveToast();
+                });
+              });
+          });
+        });
+
 
       if(vm.hints.length === 0)
         vm.addHintTranslate = $translate.instant("preview-HINT");
     }
 
 
+    function uploadPic(file,deckId,flashcardId)
+    {
+      file.upload = Upload.upload(
+        {
+          url: '/api/decks/'+deckId+'/flashcards/'+flashcardId+'/questionImage',
+          headers: {
+            'Content-Type': undefined
+          },
+          data: {file: file}
+        });
 
-
+      return file.upload.then(function (response) {
+        $timeout(function () {
+           file.result = response.data;
+          return file.result;
+        });
+      }, function (response) {
+        if (response.status > 0)
+          file.errorMsg = response.status + ': ' + response.data;
+      }, function (evt) {
+        // Math.min is to fix IE which reports 200% sometimes
+        file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+      });
+    }
 
     function updateCard(){
       BackendService.getDeckById(vm.deckId)

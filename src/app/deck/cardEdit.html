@@ -34,7 +34,7 @@
             <div class="addCard">
               <md-input-container class="md-block md-whiteframe-4dp middleCard" md-no-float>
                 <div ngf-select
-                     ng-model="questionFile"
+                     ng-model="myDeckPreview.questionFile"
                      name="questionFile"
                      ngf-pattern="'image/*'"
                      ngf-accept="'image/*'"
@@ -63,11 +63,11 @@
                   ng-model="myDeckPreview.question" rows="5"
                   md-select-on-focus
                   required></textarea>
-                <div class="display: inline-block;" ng-show="questionFile">
-                  <md-button ng-click="questionFile=null;"
+                <div class="display: inline-block;" ng-show="myDeckPreview.questionFile">
+                  <md-button ng-click="myDeckPreview.questionFile=null;"
                             aria-label="closeImg"
                             class="closePosition">{{"addCard-REMOVE_IMAGE" | translate}}</md-button>
-                  <img style="text-align: center;" ng-show="myDeckPreview.questionFile.$valid" ngf-thumbnail="questionFile" class="imgStyle">
+                  <img style="text-align: center;" ng-show="myDeckPreview.questionFile.$valid" ngf-thumbnail="myDeckPreview.questionFile" class="imgStyle">
                 </div>
 
                 <div ng-class="myDeckPreview.question.length == 1000 ? 'counterError' : 'counter'">
@@ -134,7 +134,7 @@
               <!--ANSWER AREA:-->
               <md-input-container class="md-block md-whiteframe-4dp middleCard" md-no-float>
                 <div ngf-select
-                     ng-model="answerFile"
+                     ng-model="myDeckPreview.answerFile"
                      name="answerFile"
                      ngf-pattern="'image/*'"
                      ngf-accept="'image/*'"
@@ -156,9 +156,9 @@
                   ng-model="myDeckPreview.answer" rows="5"
                   md-select-on-focus
                   required></textarea>
-                <div class="display: inline-block;" ng-show="answerFile">
-                  <md-button ng-click="answerFile=null;" aria-label="closeImg" class="closePosition">Usuń zdjęcie ✖</md-button>
-                  <img style="text-align: center;" ng-show="myDeckPreview.answerFile.$valid" ngf-thumbnail="answerFile" class="imgStyle">
+                <div class="display: inline-block;" ng-show="myDeckPreview.answerFile">
+                  <md-button ng-click="myDeckPreview.answerFile=null;" aria-label="closeImg" class="closePosition">Usuń zdjęcie ✖</md-button>
+                  <img style="text-align: center;" ng-show="myDeckPreview.answerFile.$valid" ngf-thumbnail="myDeckPreview.answerFile" class="imgStyle">
                 </div>
 
                 <div ng-class="myDeckPreview.answer.length == 1000 ? 'counterError' : 'counter'">
@@ -170,8 +170,8 @@
               </md-input-container>
 
               <div layout="row">
-                <md-progress-linear ng-show="questionFile.progress >= 0" md-mode="determinate" value="{{questionFile.progress}}"></md-progress-linear>
-                <md-progress-linear ng-show="answerFile.progress >= 0" md-mode="determinate" value="{{answerFile.progress}}"></md-progress-linear>
+                <md-progress-linear ng-show="myDeckPreview.questionFile.progress >= 0" md-mode="determinate" value="{{myDeckPreview.questionFile.progress}}"></md-progress-linear>
+                <md-progress-linear ng-show="myDeckPreview.answerFile.progress >= 0" md-mode="determinate" value="{{myDeckPreview.answerFile.progress}}"></md-progress-linear>
 
                 <md-button type="submit" class="md-raised addCardButtons addCardButton"
                            ng-if="!myDeckPreview.editMode" flex="50">{{"addCard-ADD_TO_DECK" | translate}}</md-button>
