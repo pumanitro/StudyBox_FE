@@ -30,7 +30,7 @@
     .service('BackendService', BackendService);
 
   /** @ngInject */
-  function BackendService($http, $q, Upload,$timeout) {
+  function BackendService($http, $q) {
 
     this.getDeckById = getDeckById;
     this.getDecksByName = getDecksByName;
